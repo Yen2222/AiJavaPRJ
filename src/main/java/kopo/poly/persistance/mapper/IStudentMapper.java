@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 @Mapper
+//Spring Boot 시작 -> Mapper XML 파일과 연결 & 메모리 올림 (자동)
 // 메모리에 올리는 것 -> 서로서로 호출이 가능해짐
 public interface IStudentMapper {
 
