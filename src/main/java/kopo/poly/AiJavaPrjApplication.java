@@ -10,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
@@ -87,17 +88,59 @@ public class AiJavaPrjApplication implements CommandLineRunner {
         pDTO.setEmail("hglee@kopo.ac.kr");
         pDTO.setAddr("서울");
 
+        List<StudentDTO> plist = new ArrayList<>();
 
-        rlist = studentService.insertStudent(pDTO);
+        for (int i=0; i<10; i++) {
+            StudentDTO sDTO = new StudentDTO();
 
-        rlist.forEach(dto -> {
+            sDTO.setUserId("yeeunlee"+String.valueOf(i));
+            sDTO.setUserName("이예은"+String.valueOf(i));
+            sDTO.setEmail("1234@naver.com"+String.valueOf(i));
+            sDTO.setAddr("234"+String.valueOf(i));
+
+            plist.add(sDTO);
+
+            sDTO = null;
+        }
+
+        studentService.insertStudentlist(plist);
+
+
+        plist.forEach(dto -> {
             log.info("DB에 저장된 아이디 : " + dto.getUserId());
             log.info("DB에 저장된 이름 : " + dto.getUserName());
             log.info("DB에 저장된 이메일 : " + dto.getEmail());
             log.info("DB에 저장된 주소 : " + dto.getAddr());
         });
 
-        studentService.deleteStudent(pDTO);
+
+
+        //학생 수정
+//        pDTO = new StudentDTO();
+//
+//        pDTO.setUserId("hglee67");
+//        pDTO.setUserName("이협건 수정");
+//        pDTO.setEmail("hglee@kopo.ac.kr_수정");
+//        pDTO.setAddr("서울_수정");
+//
+//
+//        rlist = studentService.updateStudent(pDTO);
+//
+//        rlist.forEach(dto -> {
+//            log.info("DB에 저장된 아이디 : " + dto.getUserId());
+//            log.info("DB에 저장된 이름 : " + dto.getUserName());
+//            log.info("DB에 저장된 이메일 : " + dto.getEmail());
+//            log.info("DB에 저장된 주소 : " + dto.getAddr());
+//        });
+
+//        rlist = studentService.deleteStudent(pDTO);
+//
+//        rlist.forEach(dto -> {
+//            log.info("DB에 저장된 아이디 : " + dto.getUserId());
+//            log.info("DB에 저장된 이름 : " + dto.getUserName());
+//            log.info("DB에 저장된 이메일 : " + dto.getEmail());
+//            log.info("DB에 저장된 주소 : " + dto.getAddr());
+//        });
 
         log.info("자바 프로그래밍 종료!!");
     }
